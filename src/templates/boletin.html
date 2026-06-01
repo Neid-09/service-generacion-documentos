@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Boletín Informativo — {{periodoNombre}} {{anioLectivo}}</title>
+  <style>{{estilos}}</style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════
+       1. CABECERA INSTITUCIONAL
+  ═══════════════════════════════ -->
+  <div class="header">
+    {{logoTag}}
+    <div class="header-center">
+      <div class="inst-nombre">{{instNombre}}</div>
+      <div class="inst-meta">
+        {{instResolucion}}
+        CÓDIGO DANE: {{instDane}} &nbsp;| NIT: {{instNit}}
+        {{instDireccion}}
+      </div>
+      <div class="boletin-titulo">BOLETÍN INFORMATIVO — AÑO LECTIVO {{anioLectivo}}</div>
+      {{gradoSede}}
+    </div>
+    {{banderaTag}}
+  </div>
+
+  <div class="sep-gold"></div>
+
+  <!-- ═══════════════════════════════
+       2. DATOS DEL ESTUDIANTE
+  ═══════════════════════════════ -->
+  <div class="estudiante-section">
+    <div class="est-left">
+      <span class="lbl">Estudiante</span>
+      <span class="val">{{estudianteNombre}}</span>
+
+      <div class="row-data">
+        <div class="col-data">
+          <span class="lbl">Fecha de Entrega</span>
+          <span class="val-sm">{{fechaEmision}}</span>
+        </div>
+        <div class="col-data">
+          <span class="lbl">Período Actual</span>
+          <span class="val-sm">{{periodoNombre}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="est-right">
+      <span class="lbl">Grado / Nivel</span>
+      <span class="val">{{gradoNombre}}</span>
+    </div>
+  </div>
+
+  <div class="sep-thin"></div>
+
+  <!-- ═══════════════════════════════
+       3. TABLA DE NOTAS
+  ═══════════════════════════════ -->
+  <table>
+    <thead>
+      <!-- Fila 1: etiquetas de columnas principales -->
+      <tr>
+        <th class="th-asig-main" rowspan="2">ASIGNATURAS</th>
+        <th class="th-asig-main" rowspan="2" style="text-align: center;">IHS</th>
+        {{thPeriodos1}}
+        <th class="th-final" colspan="2">ACUMULADO<br>FINAL</th>
+      </tr>
+      <!-- Fila 2: sub-etiquetas por período -->
+      <tr>
+        {{thPeriodos2}}
+        <th class="th-sub th-sub-final">P</th>
+        <th class="th-sub th-sub-final">C</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{filasAsignaturas}}
+      <!-- Fila PROMEDIO -->
+      <tr class="tr-prom">
+        <td class="td-asig" colspan="2">PROMEDIO</td>
+        {{promediosPeriodo}}
+        <td class="td-nota"></td>
+        <td class="td-def">{{promedioFinal}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════
+       4. LEYENDA + ESCALA DE VALORACIÓN
+  ═══════════════════════════════ -->
+  <div class="bottom-row">
+    <div class="leyenda-box">
+      <div class="sec-title">Leyenda</div>
+      <div class="leyenda-grid">
+        <span class="ley-item"><span class="ley-key">C:</span> Calificación numérica del período</span>
+        <span class="ley-item"><span class="ley-key">CSI:</span> Comportamiento, ser e intelecto</span>
+        <span class="ley-item"><span class="ley-key">IHS:</span> Intensidad horaria semanal</span>
+        <span class="ley-item"><span class="ley-key">P:</span> Promedio acumulado ponderado</span>
+      </div>
+    </div>
+
+    <div class="escala-box">
+      <div class="sec-title">Escala de Valoración</div>
+      <table class="tbl-escala">
+        <thead>
+          <tr>
+            <th colspan="2">BAJO</th>
+            <th colspan="2">BÁSICO</th>
+            <th colspan="2">ALTO</th>
+            <th>SUPERIOR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2">1.0 – 2.9</td>
+            <td colspan="2">3.0 – 3.9</td>
+            <td colspan="2">4.0 – 4.5</td>
+            <td>4.6 – 5.0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       5. OBSERVACIONES
+  ═══════════════════════════════ -->
+  <div class="obs-section">
+    <div class="sec-title">Observaciones</div>
+    <div class="obs-box"></div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       6. FIRMAS
+  ═══════════════════════════════ -->
+  <div class="firmas">
+    <div class="firma-bloque">
+      {{firmaRectorTag}}
+      <div class="firma-linea"></div>
+      <div class="firma-nombre">{{rectorNombre}}</div>
+      <div class="firma-cargo">Rector</div>
+    </div>
+    <div class="firma-bloque">
+      {{firmaDirectorTag}}
+      <div class="firma-linea"></div>
+      <div class="firma-nombre">{{directorNombre}}</div>
+      <div class="firma-cargo">Directora de Grupo</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════
+       7. PIE DE PÁGINA
+  ═══════════════════════════════ -->
+  <div class="footer">
+    {{footerDireccion}}
+    <div>
+      <strong>{{anioLectivo}} {{instNombre}} — Sistema de Gestión Académica</strong>
+    </div>
+  </div>
+
+</body>
+</html>

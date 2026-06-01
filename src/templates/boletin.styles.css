@@ -1,0 +1,401 @@
+/* =============================================================
+   BOLETIN.STYLES.CSS
+   Estilos del Boletín Académico — SGA
+   Usa variables CSS para la paleta institucional.
+   ============================================================= */
+
+/* ── Variables de la paleta institucional ── */
+:root {
+  --green-dark:   #2d6b1f;  /* cabeceras de tabla, labels, títulos */
+  --green-medium: #3d7a2a;  /* sub-cabeceras (segunda fila del thead) */
+  --green-final:  #1e4d12;  /* columna ACUMULADO FINAL */
+  --green-row:    #f2f8ef;  /* fila PROMEDIO, fondo claro */
+  --border:       #aac8a0;  /* bordes generales de tabla */
+  --gold-line:    #c8a517;  /* línea dorada separadora del header */
+}
+
+/* ── Reset base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 9px;
+  color: #1a1a1a;
+  background: #fff;
+  padding: 10mm 10mm 8mm 10mm;
+}
+
+/* =============================================================
+   1. CABECERA INSTITUCIONAL
+   ============================================================= */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.logo {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.logo-ph {
+  width: 68px;
+  height: 68px;
+  flex-shrink: 0;
+}
+
+.bandera {
+  width: 60px;
+  height: 52px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.bandera-ph {
+  width: 60px;
+  height: 52px;
+  flex-shrink: 0;
+}
+
+.header-center {
+  flex: 1;
+  text-align: center;
+}
+
+.inst-nombre {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--green-dark);
+  text-transform: uppercase;
+  line-height: 1.25;
+  margin-bottom: 3px;
+}
+
+.inst-meta {
+  font-size: 7.5px;
+  color: #333;
+  line-height: 1.7;
+}
+
+.boletin-titulo {
+  font-size: 11.5px;
+  font-weight: bold;
+  color: var(--green-dark);
+  margin-top: 3px;
+  text-transform: uppercase;
+}
+
+.boletin-sede {
+  font-size: 8px;
+  color: #555;
+  margin-top: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Separadores ── */
+.sep-gold {
+  height: 2.5px;
+  background: var(--gold-line);
+  margin: 5px 0 8px 0;
+}
+
+.sep-thin {
+  height: 1px;
+  background: var(--border);
+  margin: 7px 0 8px 0;
+}
+
+/* =============================================================
+   2. SECCIÓN DATOS DEL ESTUDIANTE
+   ============================================================= */
+.estudiante-section {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.est-left  { flex: 2; }
+.est-right { flex: 1; }
+
+.lbl {
+  display: block;
+  font-size: 7.5px;
+  font-weight: bold;
+  color: var(--green-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 1px;
+}
+
+.val {
+  display: block;
+  font-size: 11px;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 5px;
+}
+
+.val-sm {
+  display: block;
+  font-size: 10px;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 5px;
+}
+
+.row-data {
+  display: flex;
+  gap: 16px;
+}
+
+.col-data { flex: 1; }
+
+/* =============================================================
+   3. TABLA DE NOTAS — 2 FILAS DE ENCABEZADO
+   ============================================================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 8px;
+}
+
+/* --- Fila 1 del encabezado (nombres de periodo) --- */
+thead tr:first-child th {
+  background: var(--green-dark);
+  color: #fff;
+  font-size: 8px;
+  font-weight: bold;
+  text-align: center;
+  padding: 4px 3px;
+  border: 1px solid #1e4d12;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.th-asig-main {
+  text-align: left !important;
+  padding-left: 6px !important;
+  min-width: 140px;
+}
+
+.th-periodo {
+  font-size: 7.5px;
+  line-height: 1.4;
+}
+
+.th-final {
+  background: var(--green-final) !important;
+  border-color: #132f09 !important;
+}
+
+/* --- Fila 2 del encabezado (sub-etiquetas C | CSI | FALTAS) --- */
+thead tr:nth-child(2) th {
+  background: var(--green-medium);
+  color: #fff;
+  font-size: 8px;
+  font-weight: bold;
+  text-align: center;
+  padding: 3px 4px;
+  border: 1px solid #2d6b1f;
+}
+
+.th-sub-final {
+  background: var(--green-final) !important;
+}
+
+/* --- Cuerpo de la tabla --- */
+tbody td {
+  padding: 3px 5px;
+  border: 1px solid var(--border);
+  font-size: 8.5px;
+  color: #1a1a1a;
+  vertical-align: middle;
+}
+
+.td-asig {
+  font-weight: 600;
+  text-align: left;
+  padding-left: 7px !important;
+}
+
+.td-nota {
+  text-align: center;
+  font-weight: 500;
+}
+
+.td-def {
+  text-align: center;
+  font-weight: bold;
+  background: #edf5e9;
+}
+
+/* Nota reprobada */
+.bajo { color: #cc2200; }
+
+/* Fila alterna */
+tr.tr-alt { background: #f8fbf6; }
+
+/* --- Fila PROMEDIO --- */
+tr.tr-prom td {
+  background: var(--green-row);
+  font-weight: bold;
+  border: 1px solid var(--border);
+}
+
+tr.tr-prom .td-asig { color: var(--green-dark); }
+
+.prom-cell {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* =============================================================
+   4. LEYENDA + ESCALA DE VALORACIÓN
+   ============================================================= */
+.bottom-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+  align-items: flex-start;
+}
+
+.leyenda-box { flex: 1; }
+.escala-box  { flex: 1.2; }
+
+.sec-title {
+  font-size: 8px;
+  font-weight: bold;
+  color: var(--green-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 4px;
+}
+
+.leyenda-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 8px;
+}
+
+.ley-item {
+  font-size: 7.5px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.ley-key {
+  font-weight: bold;
+  color: var(--green-dark);
+}
+
+/* Tabla de escala */
+.tbl-escala {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8px;
+}
+
+.tbl-escala th {
+  background: var(--green-dark);
+  color: #fff;
+  padding: 3px 5px;
+  text-align: center;
+  border: 1px solid #1e4d12;
+  font-size: 7.5px;
+}
+
+.tbl-escala td {
+  padding: 2px 5px;
+  text-align: center;
+  border: 1px solid var(--border);
+  background: #f8fbf6;
+  font-size: 7.5px;
+}
+
+/* =============================================================
+   5. OBSERVACIONES
+   ============================================================= */
+.obs-section { margin-bottom: 16px; }
+
+.obs-box {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  min-height: 52px;
+  padding: 6px 8px;
+  font-size: 8px;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* =============================================================
+   6. FIRMAS
+   ============================================================= */
+.firmas {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 18px;
+  margin-bottom: 12px;
+}
+
+.firma-bloque {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.firma-img {
+  height: 42px;
+  width: 130px;
+  object-fit: contain;
+  margin-bottom: 2px;
+}
+
+.firma-img-ph {
+  height: 42px;
+  width: 130px;
+  display: block;
+}
+
+.firma-linea {
+  width: 170px;
+  border-top: 1px solid #555;
+  margin-bottom: 3px;
+}
+
+.firma-nombre {
+  font-size: 9px;
+  font-weight: bold;
+  color: #111;
+  text-transform: uppercase;
+}
+
+.firma-cargo {
+  font-size: 8px;
+  color: var(--green-dark);
+}
+
+/* =============================================================
+   7. PIE DE PÁGINA
+   ============================================================= */
+.footer {
+  border-top: 1px solid var(--border);
+  padding-top: 5px;
+  text-align: center;
+  font-size: 7px;
+  color: #888;
+  line-height: 1.7;
+}
+
+.footer strong { color: #555; }
+
+/* ── Impresión ── */
+@media print {
+  body { margin: 0; padding: 8mm; }
+}
