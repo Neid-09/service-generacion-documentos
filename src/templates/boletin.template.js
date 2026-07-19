@@ -20,9 +20,12 @@ const fs = require("fs");
 const {
 	getFechaEmision,
 	imgTag,
+	buildColgroup,
 	buildThPeriodos1,
 	buildThPeriodos2,
+	buildThPeriodos3,
 	buildFilasAsignaturas,
+	buildFilaComportamiento,
 	buildPromediosPeriodo,
 	calcPromedioFinal,
 } = require("./boletin.helpers");
@@ -62,12 +65,16 @@ function generarHtmlBoletin(payload) {
 		estudiante,
 		grado,
 		asignaturas,
+		comportamiento,
 	} = payload;
 
 	// ── Secciones dinámicas ──────────────────────────────────────────────────
+	const colgroup = buildColgroup(periodos);
 	const thPeriodos1 = buildThPeriodos1(periodos);
 	const thPeriodos2 = buildThPeriodos2(periodos);
+	const thPeriodos3 = buildThPeriodos3(periodos);
 	const filasAsignaturas = buildFilasAsignaturas(asignaturas, periodos);
+	const filaComportamiento = buildFilaComportamiento(comportamiento, periodos);
 	const promediosPeriodo = buildPromediosPeriodo(asignaturas, periodos);
 	const promedioFinal = calcPromedioFinal(asignaturas);
 
@@ -77,6 +84,11 @@ function generarHtmlBoletin(payload) {
 		institucion.banderaUrl || institucion.selloUrl,
 		"bandera",
 		"Bandera / Sello",
+	);
+	const selloObsTag = imgTag(
+		institucion.selloUrl || institucion.logoUrl,
+		"obs-icon",
+		"Sello institucional",
 	);
 
 	// ── Datos de firmas ──────────────────────────────────────────────────────
@@ -111,6 +123,7 @@ function generarHtmlBoletin(payload) {
 			: "",
 		logoTag,
 		banderaTag,
+		selloObsTag,
 
 		// Footer
 		footerDireccion: institucion.direccion
@@ -122,14 +135,18 @@ function generarHtmlBoletin(payload) {
 
 		// Grado
 		gradoNombre: (grado?.nombre || "").toUpperCase(),
-		gradoSede: grado?.nombre
-			? `<div class="boletin-sede">${grado.nombre}</div>`
+		gradoNivel: (grado?.nivel || "").toUpperCase(),
+		gradoSede: institucion.sede
+			? `<div class="boletin-sede">SEDE: ${institucion.sede.toUpperCase()}</div>`
 			: "",
 
 		// Tabla de notas
+		colgroup,
 		thPeriodos1,
 		thPeriodos2,
+		thPeriodos3,
 		filasAsignaturas,
+		filaComportamiento,
 		promediosPeriodo,
 		promedioFinal,
 

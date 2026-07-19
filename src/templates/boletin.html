@@ -16,119 +16,112 @@
       <div class="inst-nombre">{{instNombre}}</div>
       <div class="inst-meta">
         {{instResolucion}}
-        CÓDIGO DANE: {{instDane}} &nbsp;| NIT: {{instNit}}
+        CODIGO DANE: {{instDane}} &nbsp;| NIT: {{instNit}}
         {{instDireccion}}
       </div>
-      <div class="boletin-titulo">BOLETÍN INFORMATIVO — AÑO LECTIVO {{anioLectivo}}</div>
-      {{gradoSede}}
     </div>
     {{banderaTag}}
   </div>
 
-  <div class="sep-gold"></div>
+  <div class="titulo-block">
+    <div class="boletin-titulo">BOLETÍN INFORMATIVO</div>
+    <div class="boletin-subtitulo">AÑO LECTIVO {{anioLectivo}}</div>
+  </div>
+
+  <div class="sep-line"></div>
+
+  {{gradoSede}}
 
   <!-- ═══════════════════════════════
        2. DATOS DEL ESTUDIANTE
   ═══════════════════════════════ -->
   <div class="estudiante-section">
-    <div class="est-left">
+    <div class="est-col est-col-wide">
       <span class="lbl">Estudiante</span>
       <span class="val">{{estudianteNombre}}</span>
-
-      <div class="row-data">
-        <div class="col-data">
-          <span class="lbl">Fecha de Entrega</span>
-          <span class="val-sm">{{fechaEmision}}</span>
-        </div>
-        <div class="col-data">
-          <span class="lbl">Período Actual</span>
-          <span class="val-sm">{{periodoNombre}}</span>
-        </div>
-      </div>
     </div>
-
-    <div class="est-right">
-      <span class="lbl">Grado / Nivel</span>
+    <div class="est-col">
+      <span class="lbl">Grado</span>
       <span class="val">{{gradoNombre}}</span>
     </div>
+    <div class="est-col">
+      <span class="lbl">Nivel</span>
+      <span class="val">{{gradoNivel}}</span>
+    </div>
   </div>
-
-  <div class="sep-thin"></div>
 
   <!-- ═══════════════════════════════
        3. TABLA DE NOTAS
   ═══════════════════════════════ -->
   <table>
+    {{colgroup}}
     <thead>
-      <!-- Fila 1: etiquetas de columnas principales -->
+      <!-- Fila 1: ASIGNATURAS / IHS (rowspan 3) + nombre de cada período (colspan 5) -->
       <tr>
-        <th class="th-asig-main" rowspan="2">ASIGNATURAS</th>
-        <th class="th-asig-main" rowspan="2" style="text-align: center;">IHS</th>
+        <th class="th-asig-main" rowspan="3">ASIGNATURAS</th>
+        <th class="th-ihs" rowspan="3">IHS</th>
         {{thPeriodos1}}
-        <th class="th-final" colspan="2">ACUMULADO<br>FINAL</th>
+        <th class="th-final th-periodo" colspan="5">ACUMULADO<br>FINAL</th>
       </tr>
-      <!-- Fila 2: sub-etiquetas por período -->
+      <!-- Fila 2: C | DSPÑO | FALTAS (colspan 2) | P -->
       <tr>
         {{thPeriodos2}}
-        <th class="th-sub th-sub-final">P</th>
-        <th class="th-sub th-sub-final">C</th>
+        <th class="th-sub th-sub-final" rowspan="2">C</th>
+        <th class="th-sub th-sub-final" rowspan="2">DSPÑO</th>
+        <th class="th-sub th-sub-final" colspan="2">FALTAS</th>
+        <th class="th-sub th-sub-final" rowspan="2">P</th>
+      </tr>
+      <!-- Fila 3: CJ | SJ -->
+      <tr>
+        {{thPeriodos3}}
+        <th class="th-sub th-sub-final th-sub-min">CJ</th>
+        <th class="th-sub th-sub-final th-sub-min">SJ</th>
       </tr>
     </thead>
     <tbody>
       {{filasAsignaturas}}
-      <!-- Fila PROMEDIO -->
+      {{filaComportamiento}}
+      <!-- Fila PROMEDIO SEMESTRE -->
       <tr class="tr-prom">
-        <td class="td-asig" colspan="2">PROMEDIO</td>
+        <td class="td-asig" colspan="2">PROMEDIO SEMESTRE</td>
         {{promediosPeriodo}}
+        <td class="td-def prom-cell">{{promedioFinal}}</td>
+        <td class="td-txt"></td>
         <td class="td-nota"></td>
-        <td class="td-def">{{promedioFinal}}</td>
+        <td class="td-nota"></td>
+        <td class="td-nota"></td>
       </tr>
     </tbody>
   </table>
 
   <!-- ═══════════════════════════════
-       4. LEYENDA + ESCALA DE VALORACIÓN
+       4. LEYENDA
   ═══════════════════════════════ -->
-  <div class="bottom-row">
-    <div class="leyenda-box">
-      <div class="sec-title">Leyenda</div>
-      <div class="leyenda-grid">
-        <span class="ley-item"><span class="ley-key">C:</span> Calificación numérica del período</span>
-        <span class="ley-item"><span class="ley-key">CSI:</span> Comportamiento, ser e intelecto</span>
-        <span class="ley-item"><span class="ley-key">IHS:</span> Intensidad horaria semanal</span>
-        <span class="ley-item"><span class="ley-key">P:</span> Promedio acumulado ponderado</span>
-      </div>
-    </div>
-
-    <div class="escala-box">
-      <div class="sec-title">Escala de Valoración</div>
-      <table class="tbl-escala">
-        <thead>
-          <tr>
-            <th colspan="2">BAJO</th>
-            <th colspan="2">BÁSICO</th>
-            <th colspan="2">ALTO</th>
-            <th>SUPERIOR</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colspan="2">1.0 – 2.9</td>
-            <td colspan="2">3.0 – 3.9</td>
-            <td colspan="2">4.0 – 4.5</td>
-            <td>4.6 – 5.0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="leyenda-row">
+    <span class="ley-item"><span class="ley-key">IHS=</span> Intensidad Horaria Semanal</span>
+    <span class="ley-item"><span class="ley-key">C=</span> Calificación</span>
+    <span class="ley-item"><span class="ley-key">DSPÑO=</span> Desempeño</span>
+    <span class="ley-item"><span class="ley-key">CJ=</span> Con Justificacion</span>
+    <span class="ley-item"><span class="ley-key">SJ=</span> Sin Justificacion</span>
+    <span class="ley-item"><span class="ley-key">P=</span> Puesto</span>
   </div>
 
   <!-- ═══════════════════════════════
-       5. OBSERVACIONES
+       5. OBSERVACIÓN
   ═══════════════════════════════ -->
-  <div class="obs-section">
-    <div class="sec-title">Observaciones</div>
-    <div class="obs-box"></div>
+  <div class="obs-wrapper">
+    <div class="obs-side">
+      {{selloObsTag}}
+      <span class="obs-label">OBSERVACIÓN</span>
+    </div>
+    <div class="obs-lines">
+      <div class="obs-line"></div>
+      <div class="obs-line"></div>
+      <div class="obs-line"></div>
+      <div class="obs-line"></div>
+      <div class="obs-line"></div>
+      <div class="obs-line"></div>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════
@@ -145,7 +138,7 @@
       {{firmaDirectorTag}}
       <div class="firma-linea"></div>
       <div class="firma-nombre">{{directorNombre}}</div>
-      <div class="firma-cargo">Directora de Grupo</div>
+      <div class="firma-cargo">Director de Grado</div>
     </div>
   </div>
 
