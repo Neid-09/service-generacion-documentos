@@ -17,13 +17,17 @@ async function htmlToPdf(htmlContent) {
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
         '--disable-gpu',
+        '--disable-background-networking',
       ],
     });
 
     const page = await browser.newPage();
 
-    // Cargar el HTML como contenido directo
-    await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+    // 'networkidle0' nunca se cumple de forma confiable con setContent(): Chromium
+    // mantiene conexiones de fondo propias (no relacionadas con el HTML) que evitan
+    // llegar a "red inactiva", y termina esperando el timeout completo (30s) siempre.
+    // 'load' sí espera a que las imágenes referenciadas terminen de cargar.
+    await page.setContent(htmlContent, { waitUntil: 'load' });
 
     const pdfBuffer = await page.pdf({
       format: 'A4',
