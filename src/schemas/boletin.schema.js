@@ -13,6 +13,7 @@ const institucionSchema = Joi.object({
   banderaUrl: Joi.string().uri().allow(null, '').optional(),
   direccion: Joi.string().allow(null, '').optional(),
   sede: Joi.string().allow(null, '').optional(),
+  nombreRector: Joi.string().allow(null, '').optional(),
 });
 
 const periodoReporteSchema = Joi.object({
