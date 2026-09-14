@@ -66,6 +66,8 @@ function generarHtmlBoletin(payload) {
 		grado,
 		asignaturas,
 		comportamiento,
+		puesto,
+		totalEstudiantes,
 	} = payload;
 
 	// ── Secciones dinámicas ──────────────────────────────────────────────────
@@ -135,7 +137,10 @@ function generarHtmlBoletin(payload) {
 
 		// Grado
 		gradoNombre: (grado?.nombre || "").toUpperCase(),
-		gradoNivel: (grado?.nivel || "").toUpperCase(),
+		puestoEstudiante:
+			puesto !== null && puesto !== undefined && puesto !== ""
+				? `${puesto}${totalEstudiantes ? ` de ${totalEstudiantes}` : ""}`
+				: "",
 		gradoSede: institucion.sede
 			? `<div class="boletin-sede">SEDE: ${institucion.sede.toUpperCase()}</div>`
 			: "",

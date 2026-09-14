@@ -89,6 +89,12 @@ const boletinPayloadSchema = Joi.object({
   grado: gradoSchema.required(),
   asignaturas: Joi.array().items(asignaturaSchema).min(0).required(),
   comportamiento: comportamientoSchema.optional(),
+  // Puesto del estudiante en su grupo (1 = mejor promedio). Nulo si el grupo
+  // no tiene compañeros activos.
+  puesto: Joi.alternatives(Joi.number().integer().min(1), Joi.string())
+    .allow(null, '')
+    .optional(),
+  totalEstudiantes: Joi.number().integer().min(0).allow(null).optional(),
 });
 
 module.exports = { boletinPayloadSchema };

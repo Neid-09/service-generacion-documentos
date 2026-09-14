@@ -96,6 +96,8 @@ X-API-Key: <valor de API_KEY en .env>
     "directorNombre": "Marta Rodríguez",
     "firmaDirectorUrl": "http://localhost:8080/assets/firma_director.png"
   },
+  "puesto": 3,
+  "totalEstudiantes": 28,
   "asignaturas": [
     {
       "nombre": "Matemáticas",
