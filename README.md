@@ -91,6 +91,8 @@ X-API-Key: <valor de API_KEY en .env>
     "documento": "1006789456",
     "nombreCompleto": "Juan Carlos Pérez López"
   },
+  "puesto": 3,
+  "totalEstudiantes": 28,
   "grado": {
     "nombre": "Décimo A",
     "directorNombre": "Marta Rodríguez",
@@ -100,18 +102,22 @@ X-API-Key: <valor de API_KEY en .env>
     {
       "nombre": "Matemáticas",
       "docente": "Carlos Jiménez",
+      "ihs": 4,
       "notasPorPeriodo": [
-        { "nombrePeriodo": "Primer Periodo", "porcentaje": 50.0, "valor": 4.5, "aporte": 2.25 }
+        { "nombrePeriodo": "Primer Periodo", "porcentaje": 50.0, "valor": 4.5, "aporte": 2.25, "desempeno": "ALTO" }
       ],
-      "notaDefinitiva": 2.25
+      "notaDefinitiva": 4.50,
+      "desempeno": "ALTO"
     },
     {
       "nombre": "Lenguaje",
       "docente": "Ana Ruiz",
+      "ihs": 4,
       "notasPorPeriodo": [
-        { "nombrePeriodo": "Primer Periodo", "porcentaje": 50.0, "valor": 3.8, "aporte": 1.90 }
+        { "nombrePeriodo": "Primer Periodo", "porcentaje": 50.0, "valor": 2.8, "aporte": 1.40, "desempeno": "BAJO" }
       ],
-      "notaDefinitiva": 1.90
+      "notaDefinitiva": 2.80,
+      "desempeno": "BAJO"
     }
   ]
 }

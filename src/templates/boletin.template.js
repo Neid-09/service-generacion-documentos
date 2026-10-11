@@ -103,10 +103,29 @@ function generarHtmlBoletin(payload) {
 		"Firma Director de Grupo",
 	);
 
+	// ── Puesto general del estudiante ─────────────────────────────────────────
+	const puestoVal = payload.puesto ?? estudiante?.puesto ?? null;
+	const totalEstudiantesVal =
+		payload.totalEstudiantes ?? estudiante?.totalEstudiantes ?? null;
+
+	let puestoTexto = "—";
+	if (
+		puestoVal !== null &&
+		puestoVal !== undefined &&
+		String(puestoVal).trim() !== ""
+	) {
+		puestoTexto =
+			totalEstudiantesVal !== null &&
+			totalEstudiantesVal !== undefined &&
+			String(totalEstudiantesVal).trim() !== ""
+				? `${puestoVal} / ${totalEstudiantesVal}`
+				: `${puestoVal}`;
+	}
+
 	// ── Tokens de texto simples ──────────────────────────────────────────────
 	const tokens = {
 		// Meta
-		estilos: cssEstilos,
+		estilos: `<style>\n${cssEstilos}\n</style>`,
 		anioLectivo: anioLectivo,
 		periodoNombre: periodoReporte?.nombre || "",
 		fechaEmision: getFechaEmision(),
@@ -132,6 +151,15 @@ function generarHtmlBoletin(payload) {
 
 		// Estudiante
 		estudianteNombre: (estudiante.nombreCompleto || "").toUpperCase(),
+
+		// Puesto
+		puesto: puestoTexto,
+		puestoNumero:
+			puestoVal !== null && puestoVal !== undefined ? String(puestoVal) : "",
+		totalEstudiantes:
+			totalEstudiantesVal !== null && totalEstudiantesVal !== undefined
+				? String(totalEstudiantesVal)
+				: "",
 
 		// Grado
 		gradoNombre: (grado?.nombre || "").toUpperCase(),
