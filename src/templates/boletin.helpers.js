@@ -41,6 +41,20 @@ const fmtDef = (n) =>
 const fmtTxt = (v) => (v !== null && v !== undefined ? String(v) : '');
 
 /**
+ * Formatea el desempeño académico institucional (BAJO, BÁSICO, ALTO, SUPERIOR)
+ * o retorna el fallback ('-' por defecto para acumulado, o '' si se especifica).
+ * @param {string|null|undefined} dsp
+ * @param {string} [fallback='-']
+ * @returns {string}
+ */
+const fmtDesempeno = (dsp, fallback = '-') => {
+  if (!dsp || String(dsp).trim() === '' || String(dsp).trim() === '-') {
+    return fallback;
+  }
+  return String(dsp).trim().toUpperCase();
+};
+
+/**
  * Indica si una nota está reprobada (< 3.0).
  * @param {number|null} n
  * @returns {boolean}
@@ -116,7 +130,8 @@ const buildColgroup = (periodos) => {
   const numGrupos = periodos.length + 1; // + ACUMULADO FINAL
   const grupoPct = (100 - asigPct - ihsPct) / numGrupos;
   // Proporciones relativas dentro de un grupo: C | DSPÑO | CJ | SJ | P
-  const ratios = [1.1, 1.5, 0.8, 0.8, 0.9];
+  // DSPÑO recibe mayor proporción (1.8) para alojar palabras como "SUPERIOR" o "BÁSICO"
+  const ratios = [1.0, 1.8, 0.75, 0.75, 0.8];
   const ratioSum = ratios.reduce((a, b) => a + b, 0);
   const colsGrupo = ratios
     .map((r) => `<col style="width:${((grupoPct * r) / ratioSum).toFixed(2)}%">`)
@@ -187,9 +202,10 @@ const buildThPeriodos3 = (periodos) =>
  */
 const celdasPeriodo = (np) => {
   const val = np ? np.valor : null;
+  const dsp = np?.desempeno ? fmtDesempeno(np.desempeno, '') : '';
   return `
     <td class="td-nota${esBajo(val) ? ' bajo' : ''}">${val !== null && val !== undefined ? fmt(val) : ''}</td>
-    <td class="td-txt">${np ? fmtTxt(np.desempeno) : ''}</td>
+    <td class="td-txt${dsp === 'BAJO' ? ' bajo' : ''}">${dsp}</td>
     <td class="td-nota">${np ? fmtTxt(np.faltasCJ) : ''}</td>
     <td class="td-nota">${np ? fmtTxt(np.faltasSJ) : ''}</td>
     <td class="td-nota">${np ? fmtTxt(np.puesto) : ''}</td>`;
@@ -199,14 +215,18 @@ const celdasPeriodo = (np) => {
  * Genera las 5 celdas <td> del bloque ACUMULADO FINAL para una fila.
  * @param {number|null} notaDefinitiva
  * @param {object} [acumulado]
+ * @param {string|null} [desempeno]
  * @returns {string}
  */
-const celdasFinal = (notaDefinitiva, acumulado = {}) => `
+const celdasFinal = (notaDefinitiva, acumulado = {}, desempeno = null) => {
+  const dsp = fmtDesempeno(desempeno || acumulado.desempeno, '-');
+  return `
     <td class="td-def${esBajo(notaDefinitiva) ? ' bajo' : ''}">${fmtDef(notaDefinitiva)}</td>
-    <td class="td-txt">${fmtTxt(acumulado.desempeno)}</td>
+    <td class="td-txt${dsp === 'BAJO' ? ' bajo' : ''}">${dsp}</td>
     <td class="td-nota">${fmtTxt(acumulado.faltasCJ)}</td>
     <td class="td-nota">${fmtTxt(acumulado.faltasSJ)}</td>
     <td class="td-nota">${fmtTxt(acumulado.puesto)}</td>`;
+};
 
 /**
  * Genera todas las filas <tr> de asignaturas en el tbody.
@@ -231,7 +251,7 @@ const buildFilasAsignaturas = (asignaturas, periodos) =>
           <td class="td-asig">${asig.nombre.toUpperCase()}</td>
           <td class="td-ihs">${fmtTxt(asig.ihs)}</td>
           ${celdas}
-          ${celdasFinal(asig.notaDefinitiva, asig.acumulado || {})}
+          ${celdasFinal(asig.notaDefinitiva, asig.acumulado || {}, asig.desempeno)}
         </tr>`;
     })
     .join('');
@@ -256,7 +276,11 @@ const buildFilaComportamiento = (comportamiento, periodos) => {
       <td class="td-asig">COMPORTAMIENTO</td>
       <td class="td-ihs"></td>
       ${celdas}
-      ${celdasFinal(comportamiento?.notaDefinitiva ?? null, comportamiento?.acumulado || {})}
+      ${celdasFinal(
+        comportamiento?.notaDefinitiva ?? null,
+        comportamiento?.acumulado || {},
+        comportamiento?.desempeno,
+      )}
     </tr>`;
 };
 
@@ -310,6 +334,7 @@ module.exports = {
   fmt,
   fmtDef,
   fmtTxt,
+  fmtDesempeno,
   esBajo,
   getFechaEmision,
   fmtRango,

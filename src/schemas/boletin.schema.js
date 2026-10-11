@@ -32,6 +32,8 @@ const periodoInfoSchema = Joi.object({
 const estudianteSchema = Joi.object({
   documento: Joi.string().required(),
   nombreCompleto: Joi.string().required(),
+  puesto: Joi.alternatives(Joi.number().integer().min(1), Joi.string()).allow(null, '').optional(),
+  totalEstudiantes: Joi.number().integer().min(1).allow(null).optional(),
 });
 
 const gradoSchema = Joi.object({
@@ -67,6 +69,7 @@ const asignaturaSchema = Joi.object({
   ihs: Joi.number().min(0).allow(null).optional(),
   notasPorPeriodo: Joi.array().items(detalleNotaSchema).min(0).required(),
   notaDefinitiva: Joi.number().min(0).max(5).allow(null).optional(),
+  desempeno: Joi.string().allow(null, '').optional(),
   acumulado: acumuladoSchema.optional(),
 });
 
@@ -75,6 +78,7 @@ const asignaturaSchema = Joi.object({
 const comportamientoSchema = Joi.object({
   notasPorPeriodo: Joi.array().items(detalleNotaSchema).min(0).optional(),
   notaDefinitiva: Joi.number().min(0).max(5).allow(null).optional(),
+  desempeno: Joi.string().allow(null, '').optional(),
   acumulado: acumuladoSchema.optional(),
 });
 
@@ -89,6 +93,8 @@ const boletinPayloadSchema = Joi.object({
   grado: gradoSchema.required(),
   asignaturas: Joi.array().items(asignaturaSchema).min(0).required(),
   comportamiento: comportamientoSchema.optional(),
+  puesto: Joi.alternatives(Joi.number().integer().min(1), Joi.string()).allow(null, '').optional(),
+  totalEstudiantes: Joi.number().integer().min(1).allow(null).optional(),
 });
 
 module.exports = { boletinPayloadSchema };

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Boletín Informativo — {{periodoNombre}} {{anioLectivo}}</title>
-  <style>{{estilos}}</style>
+  {{estilos}}
 </head>
 <body>
 
@@ -45,8 +45,8 @@
       <span class="val">{{gradoNombre}}</span>
     </div>
     <div class="est-col">
-      <span class="lbl">Nivel</span>
-      <span class="val">{{gradoNivel}}</span>
+      <span class="lbl">Puesto</span>
+      <span class="val">{{puesto}}</span>
     </div>
   </div>
 
@@ -95,15 +95,27 @@
   </table>
 
   <!-- ═══════════════════════════════
-       4. LEYENDA
+       4. CONVENCIONES Y ESCALA INSTITUCIONAL
   ═══════════════════════════════ -->
-  <div class="leyenda-row">
-    <span class="ley-item"><span class="ley-key">IHS=</span> Intensidad Horaria Semanal</span>
-    <span class="ley-item"><span class="ley-key">C=</span> Calificación</span>
-    <span class="ley-item"><span class="ley-key">DSPÑO=</span> Desempeño</span>
-    <span class="ley-item"><span class="ley-key">CJ=</span> Con Justificacion</span>
-    <span class="ley-item"><span class="ley-key">SJ=</span> Sin Justificacion</span>
-    <span class="ley-item"><span class="ley-key">P=</span> Puesto</span>
+  <div class="convenciones-container">
+    <div class="leyenda-row">
+      <span class="ley-item"><span class="ley-key">IHS=</span> Intensidad Horaria Semanal</span>
+      <span class="ley-item"><span class="ley-key">C=</span> Calificación</span>
+      <span class="ley-item"><span class="ley-key">DSPÑO=</span> Desempeño</span>
+      <span class="ley-item"><span class="ley-key">CJ=</span> Con Justificación</span>
+      <span class="ley-item"><span class="ley-key">SJ=</span> Sin Justificación</span>
+      <span class="ley-item"><span class="ley-key">P=</span> Puesto</span>
+    </div>
+    <div class="escala-row">
+      <span class="escala-titulo">ESCALA DE VALORACIÓN:</span>
+      <span class="escala-item escala-bajo"><strong>Bajo:</strong> 1.0 a 2.9</span>
+      <span class="escala-sep">|</span>
+      <span class="escala-item escala-basico"><strong>Básico:</strong> 3.0 a 3.9</span>
+      <span class="escala-sep">|</span>
+      <span class="escala-item escala-alto"><strong>Alto:</strong> 4.0 a 4.5</span>
+      <span class="escala-sep">|</span>
+      <span class="escala-item escala-superior"><strong>Superior:</strong> 4.6 a 5.0</span>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════

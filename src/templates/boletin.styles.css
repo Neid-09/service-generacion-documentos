@@ -239,6 +239,7 @@ tbody td {
 .td-txt {
   text-align: center;
   font-size: 6.5px;
+  white-space: nowrap;
 }
 
 .td-def {
@@ -272,19 +273,26 @@ tr.tr-prom .td-asig { color: var(--green-dark); }
 }
 
 /* =============================================================
-   4. LEYENDA
+   4. CONVENCIONES Y ESCALA INSTITUCIONAL
    ============================================================= */
+.convenciones-container {
+  border: 1px solid var(--border);
+  background: #fafafa;
+  padding: 3px 6px;
+  margin-bottom: 8px;
+}
+
 .leyenda-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 3px 14px;
-  margin-bottom: 10px;
-  padding-top: 2px;
+  gap: 2px 14px;
+  padding-bottom: 3px;
+  border-bottom: 1px dashed #ccc;
 }
 
 .ley-item {
-  font-size: 7px;
+  font-size: 6.8px;
   color: #333;
 }
 
@@ -292,6 +300,38 @@ tr.tr-prom .td-asig { color: var(--green-dark); }
   font-weight: bold;
   color: var(--green-dark);
 }
+
+.escala-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2px 10px;
+  padding-top: 3px;
+  font-size: 6.8px;
+  color: #222;
+}
+
+.escala-titulo {
+  font-weight: bold;
+  color: var(--green-dark);
+  letter-spacing: 0.3px;
+}
+
+.escala-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.escala-sep {
+  color: #aaa;
+}
+
+.escala-bajo strong { color: #c62828; }
+.escala-basico strong { color: #b78103; }
+.escala-alto strong { color: #2e7d32; }
+.escala-superior strong { color: #1565c0; }
 
 /* =============================================================
    5. OBSERVACIÓN
